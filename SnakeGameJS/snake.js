@@ -31,6 +31,18 @@ let score = 0;
 function draw() {
   //   console.log("Hi");
   ctx.drawImage(ground, 0, 0);
+  //looping over snake
+  for (let i = 0; i < snake.length; i++) {
+    ctx.fillStyle = i == 0 ? "green" : "white";
+    ctx.fillRect(snake[i].x, snake[i].y, box, box);
+
+    ctx.strokeStyle = "red";
+    ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+  }
+  ctx.drawImage(foodImage, food.x, food.y) + "Hi";
+  ctx.fillStyle = "white";
+  ctx.font = "45px change one";
+  ctx.fillText(score, 2 * box, 1.6 * box);
 }
 
 //call draw function every 100 ms
