@@ -21,7 +21,7 @@ snake[0] = {
 //create the food
 let food = {
   x: Math.floor(Math.random() * 17 + 1) * box,
-  y: Math.floor(Math.random() * 17 + 1) * box
+  y: Math.floor(Math.random() * 15 + 3) * box
 };
 
 //create the score var
@@ -76,12 +76,31 @@ function draw() {
     //remove the tail
     snake.pop();
   }
-
   // which direction
   if (d == "LEFT") snakeX -= box;
   if (d == "UP") snakeY -= box;
   if (d == "RIGHT") snakeX += box;
   if (d == "DOWN") snakeY += box;
+
+  //Game over
+  if (
+    snakeX < box ||
+    snakeX > 17 * box ||
+    snakeY < 3 * box ||
+    snakeY > 17 * box ||
+    collision(newHead, snake)
+  ) {
+    clearInterval(game);
+  }
+
+  //check collision of head and tail of the snake
+  function collision(head, array) {
+    for (let i = 0; i < array.length; i++) {
+      if (head.x == array[i].x && head.y == array[i].y) {
+        return true;
+      }
+    }
+  }
 
   //add new Head
   let newHead = {
