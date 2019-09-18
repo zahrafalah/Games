@@ -2,13 +2,11 @@ const cvs = document.getElementById("snake");
 const ctx = cvs.getContext("2d");
 
 //Create the unit
-
 const box = 32;
 
 //load images
 const ground = new Image();
 ground.src = "img/ground.png";
-
 const foodImage = new Image();
 foodImage.src = "img/food.png";
 
@@ -46,20 +44,19 @@ let score = 0;
 let d;
 
 document.addEventListener("keydown", direction);
-
 function direction(event) {
   // console.log("here");
   let key = event.keyCode;
-  if (key == 37) {
+  if (key == 37 && d != "RIGHT") {
     left.play();
     d = "LEFT";
-  } else if (key == 38) {
+  } else if (key == 38 && d != "DOWN") {
     up.play();
     d = "UP";
-  } else if (key == 39) {
+  } else if (key == 39 && d != "LEFT") {
     right.play();
     d = "RIGHT";
-  } else if (key == 40) {
+  } else if (key == 40 && d != "UP") {
     down.play();
     d = "DOWN";
   }
@@ -138,5 +135,13 @@ function draw() {
   ctx.fillText(score, 2 * box, 1.6 * box);
 }
 
-//call draw function every 100 ms
-let game = setInterval(draw, 100);
+//restart
+restartButton = document.getElementById("restartButton");
+restartButton.addEventListener("click", gameRestart);
+function gameRestart() {
+  console.log("restart");
+  document.location.reload(true);
+}
+
+//call draw function every 300 ms(spead of the snake)
+let game = setInterval(draw, 300);
